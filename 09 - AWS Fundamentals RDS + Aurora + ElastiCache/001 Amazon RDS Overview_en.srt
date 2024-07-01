@@ -1,0 +1,368 @@
+1
+00:00:00,360 --> 00:00:01,230
+So let's get started
+
+2
+00:00:01,230 --> 00:00:03,810
+with an overview of AWS RDS.
+
+3
+00:00:03,810 --> 00:00:07,650
+RDS stands for Relational Database Service
+
+4
+00:00:07,650 --> 00:00:10,650
+and what it means is that it's a managed database service
+
+5
+00:00:10,650 --> 00:00:15,150
+for database that use SQL as a query language.
+
+6
+00:00:15,150 --> 00:00:17,850
+So SQL is a structured language to query database.
+
+7
+00:00:17,850 --> 00:00:21,630
+It's very well adapted and it's running on many engines.
+
+8
+00:00:21,630 --> 00:00:23,280
+So it allows you to create databases
+
+9
+00:00:23,280 --> 00:00:24,780
+that RDS service in the cloud,
+
+10
+00:00:24,780 --> 00:00:27,030
+and these databases will be managed by AWS
+
+11
+00:00:27,030 --> 00:00:29,520
+and you get a lot of benefits from it.
+
+12
+00:00:29,520 --> 00:00:32,580
+So what types of database engine are managed by AWS?
+
+13
+00:00:32,580 --> 00:00:34,530
+Well, the first one is PostgreSQL.
+
+14
+00:00:34,530 --> 00:00:37,890
+Then we have MySQL, MariaDB, Oracle,
+
+15
+00:00:37,890 --> 00:00:40,620
+Microsoft SQL Server, and finally Aurora,
+
+16
+00:00:40,620 --> 00:00:43,080
+and we have a dedicated section to Aurora.
+
+17
+00:00:43,080 --> 00:00:45,540
+So right now you can just forget about it, okay.
+
+18
+00:00:45,540 --> 00:00:47,940
+But so the first five, PostgreSQL, MySQL,
+
+19
+00:00:47,940 --> 00:00:49,200
+MariaDB, Oracle,
+
+20
+00:00:49,200 --> 00:00:52,560
+and Microsoft SQL server, you have to remember them.
+
+21
+00:00:52,560 --> 00:00:54,720
+So why would we use RDS
+
+22
+00:00:54,720 --> 00:00:57,720
+versus deploying our own database service on top of,
+
+23
+00:00:57,720 --> 00:01:00,840
+say, an EC2 instance, because this is possible.
+
+24
+00:01:00,840 --> 00:01:02,820
+Well, RDS is a managed service,
+
+25
+00:01:02,820 --> 00:01:05,459
+and as such, AWS provides a lot of services
+
+26
+00:01:05,459 --> 00:01:07,830
+on top of just giving us a database.
+
+27
+00:01:07,830 --> 00:01:09,540
+For example, the provisioning
+
+28
+00:01:09,540 --> 00:01:11,310
+of the database is fully automated
+
+29
+00:01:11,310 --> 00:01:14,640
+and so is the underlying operating system patching.
+
+30
+00:01:14,640 --> 00:01:16,830
+There is continuous backups being made
+
+31
+00:01:16,830 --> 00:01:20,160
+and you are able to restore to a specific timestamp.
+
+32
+00:01:20,160 --> 00:01:22,500
+It's called Point in Time Restore.
+
+33
+00:01:22,500 --> 00:01:23,940
+You can also have monitoring dashboards
+
+34
+00:01:23,940 --> 00:01:25,830
+to view the performance of your database.
+
+35
+00:01:25,830 --> 00:01:27,090
+You can have read replicas,
+
+36
+00:01:27,090 --> 00:01:28,980
+and we have a dedicated lecture on replicates
+
+37
+00:01:28,980 --> 00:01:29,813
+in this course.
+
+38
+00:01:29,813 --> 00:01:32,760
+To improve read performance, you can set up a multi AZ,
+
+39
+00:01:32,760 --> 00:01:34,950
+and so we do have also sections on multi AZ
+
+40
+00:01:34,950 --> 00:01:37,410
+that will be helpful for disaster recovery.
+
+41
+00:01:37,410 --> 00:01:40,020
+You have maintenance windows for the upgrades
+
+42
+00:01:40,020 --> 00:01:41,940
+and you have scaling public capabilities,
+
+43
+00:01:41,940 --> 00:01:45,000
+both vertical, by increasing the instance type,
+
+44
+00:01:45,000 --> 00:01:47,610
+and horizontal, by adding read replicas.
+
+45
+00:01:47,610 --> 00:01:49,590
+Finally, the storage is backed by EBS.
+
+46
+00:01:49,590 --> 00:01:51,180
+So this is something we already know,
+
+47
+00:01:51,180 --> 00:01:53,880
+which is gp2 volumes or io1.
+
+48
+00:01:53,880 --> 00:01:55,950
+But the only thing we do not have,
+
+49
+00:01:55,950 --> 00:02:00,510
+is we cannot SSH into the instances, the RDS instances.
+
+50
+00:02:00,510 --> 00:02:02,167
+So because this is a managed service,
+
+51
+00:02:02,167 --> 00:02:03,780
+AWS provides us a service
+
+52
+00:02:03,780 --> 00:02:07,470
+and we don't have access to the underlying EC2 instance.
+
+53
+00:02:07,470 --> 00:02:09,690
+But this is not too bad because we get all these things
+
+54
+00:02:09,690 --> 00:02:11,370
+that we would have to set up on our own
+
+55
+00:02:11,370 --> 00:02:15,660
+if we wanted to deploy our own database engine on EC2.
+
+56
+00:02:15,660 --> 00:02:17,940
+So here is one feature that can come up in the exam
+
+57
+00:02:17,940 --> 00:02:20,700
+and is around RDS storage auto scaling.
+
+58
+00:02:20,700 --> 00:02:22,710
+So the idea is that when you create an RDS database
+
+59
+00:02:22,710 --> 00:02:24,120
+you need to say how much storage you want.
+
+60
+00:02:24,120 --> 00:02:27,030
+For example, you want 20 gigabytes of storage,
+
+61
+00:02:27,030 --> 00:02:29,700
+but say you are using your database a lot
+
+62
+00:02:29,700 --> 00:02:31,502
+and you're about to run out of free space,
+
+63
+00:02:31,502 --> 00:02:33,870
+then with this feature enabled,
+
+64
+00:02:33,870 --> 00:02:36,840
+the RDS storage auto scaling, RDS will detect that
+
+65
+00:02:36,840 --> 00:02:39,330
+and will scale automatically the storage for you.
+
+66
+00:02:39,330 --> 00:02:41,730
+So you don't have to do any kind of operations
+
+67
+00:02:41,730 --> 00:02:44,970
+such as taking down database to increase the storage.
+
+68
+00:02:44,970 --> 00:02:46,470
+So the idea is that your application
+
+69
+00:02:46,470 --> 00:02:48,990
+does a lot of read and writes to your RDS database,
+
+70
+00:02:48,990 --> 00:02:51,750
+and then automatically, with some threshold
+
+71
+00:02:51,750 --> 00:02:54,630
+we'll see in a second, then the storage can auto scale.
+
+72
+00:02:54,630 --> 00:02:55,980
+And that is a feature of RDS
+
+73
+00:02:55,980 --> 00:02:57,810
+that is a very, very nice feature.
+
+74
+00:02:57,810 --> 00:03:01,950
+So this all is meant to make you avoid the operation
+
+75
+00:03:01,950 --> 00:03:05,250
+of scaling manually, your database storage.
+
+76
+00:03:05,250 --> 00:03:08,130
+For this, you need to set a maximum storage threshold,
+
+77
+00:03:08,130 --> 00:03:10,650
+so maximum limits for how much you want the storage to grow,
+
+78
+00:03:10,650 --> 00:03:13,200
+'cause you don't want it to grow infinitely, maybe,
+
+79
+00:03:13,200 --> 00:03:15,360
+and you can automatically modify storage
+
+80
+00:03:15,360 --> 00:03:16,860
+if the free storage is less
+
+81
+00:03:16,860 --> 00:03:19,740
+than 10% of what has been allocated
+
+82
+00:03:19,740 --> 00:03:21,240
+and the low storage has been lasting
+
+83
+00:03:21,240 --> 00:03:22,920
+for more than five minutes
+
+84
+00:03:22,920 --> 00:03:26,250
+and six hours have passed since the last modification.
+
+85
+00:03:26,250 --> 00:03:27,083
+If that's the case
+
+86
+00:03:27,083 --> 00:03:29,730
+then the storage will auto increase when you enable it.
+
+87
+00:03:29,730 --> 00:03:32,280
+This is very helpful for applications which
+
+88
+00:03:32,280 --> 00:03:34,830
+that have a unpredictable workload
+
+89
+00:03:34,830 --> 00:03:37,860
+and this supports all database engines for RDS,
+
+90
+00:03:37,860 --> 00:03:42,860
+just as MariaDB, MySQL, PostgreSQL, SQL server, and Oracle.
+
+91
+00:03:43,110 --> 00:03:43,950
+So that's it for this lecture.
+
+92
+00:03:43,950 --> 00:03:46,900
+I hope you liked it and I will see you in the next lecture.
+

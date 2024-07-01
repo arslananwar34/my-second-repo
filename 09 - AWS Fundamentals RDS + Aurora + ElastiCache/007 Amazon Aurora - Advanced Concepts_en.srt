@@ -1,0 +1,652 @@
+1
+00:00:00,480 --> 00:00:01,560
+So now let's discuss
+
+2
+00:00:01,560 --> 00:00:03,150
+advanced concepts of Aurora
+
+3
+00:00:03,150 --> 00:00:05,220
+that you need to know going into the exam.
+
+4
+00:00:05,220 --> 00:00:07,620
+So let's talk about replica autoscaling.
+
+5
+00:00:07,620 --> 00:00:08,919
+So let's say we have a client
+
+6
+00:00:08,919 --> 00:00:12,330
+and we have three Aurora instances right now.
+
+7
+00:00:12,330 --> 00:00:15,630
+So one will be writing through the writer endpoint
+
+8
+00:00:15,630 --> 00:00:17,400
+and the other two will be reading
+
+9
+00:00:17,400 --> 00:00:18,690
+through the reader endpoint.
+
+10
+00:00:18,690 --> 00:00:21,120
+Okay, now let's say that we are having
+
+11
+00:00:21,120 --> 00:00:24,570
+many, many read requests on the reader endpoint
+
+12
+00:00:24,570 --> 00:00:27,120
+and so therefore, the Amazon Aurora databases
+
+13
+00:00:27,120 --> 00:00:29,430
+have an increased CPU usage.
+
+14
+00:00:29,430 --> 00:00:32,310
+In that case, we can set up replica autoscaling
+
+15
+00:00:32,310 --> 00:00:33,270
+and what this will do is
+
+16
+00:00:33,270 --> 00:00:36,750
+that it will add obviously Amazon Aurora replicas
+
+17
+00:00:36,750 --> 00:00:38,010
+and then what will happen is that
+
+18
+00:00:38,010 --> 00:00:39,990
+automatically the reader endpoint
+
+19
+00:00:39,990 --> 00:00:42,690
+is going to be extended to cover
+
+20
+00:00:42,690 --> 00:00:45,120
+these new replicas and therefore
+
+21
+00:00:45,120 --> 00:00:47,820
+these new replicas will start receiving some traffic
+
+22
+00:00:47,820 --> 00:00:50,250
+and the reads will be happening
+
+23
+00:00:50,250 --> 00:00:51,870
+in a more distributed fashion,
+
+24
+00:00:51,870 --> 00:00:54,660
+hopefully bringing down the overall CPU usage.
+
+25
+00:00:54,660 --> 00:00:56,223
+So this is replica autoscaling.
+
+26
+00:00:57,780 --> 00:01:00,060
+The second thing is custom endpoints.
+
+27
+00:01:00,060 --> 00:01:02,430
+So let's say we have the same setup,
+
+28
+00:01:02,430 --> 00:01:05,940
+but this time we have two different kinds of replicas.
+
+29
+00:01:05,940 --> 00:01:09,030
+As you can see, we have some DB.R3 large
+
+30
+00:01:09,030 --> 00:01:11,910
+and some DB.R5 2X large.
+
+31
+00:01:11,910 --> 00:01:15,750
+So some read replicas are bigger than others.
+
+32
+00:01:15,750 --> 00:01:17,460
+And the reason you would do this is
+
+33
+00:01:17,460 --> 00:01:19,290
+that you want to define a subset
+
+34
+00:01:19,290 --> 00:01:22,920
+of your Aurora instances as a custom endpoint.
+
+35
+00:01:22,920 --> 00:01:25,260
+So let's say we define a custom endpoint
+
+36
+00:01:25,260 --> 00:01:28,770
+on these two bigger Aurora instances.
+
+37
+00:01:28,770 --> 00:01:30,570
+The reason we would do so is for example
+
+38
+00:01:30,570 --> 00:01:34,380
+that we know that these instances are more powerful
+
+39
+00:01:34,380 --> 00:01:36,060
+and therefore, they're going to be better
+
+40
+00:01:36,060 --> 00:01:40,290
+to run analytical queries on these specific replicas.
+
+41
+00:01:40,290 --> 00:01:41,490
+So when you do so,
+
+42
+00:01:41,490 --> 00:01:43,680
+you have a custom endpoint that's defined.
+
+43
+00:01:43,680 --> 00:01:45,540
+And when you have a custom endpoint,
+
+44
+00:01:45,540 --> 00:01:48,000
+generally the reader endpoint itself
+
+45
+00:01:48,000 --> 00:01:50,460
+is not used after defining custom endpoints.
+
+46
+00:01:50,460 --> 00:01:53,850
+So it would not disappear, but you would not use it anymore.
+
+47
+00:01:53,850 --> 00:01:55,770
+And what you would do in practice,
+
+48
+00:01:55,770 --> 00:01:57,540
+in like practically speaking,
+
+49
+00:01:57,540 --> 00:01:59,910
+is set up many custom endpoints
+
+50
+00:01:59,910 --> 00:02:02,070
+for many different kind of workloads,
+
+51
+00:02:02,070 --> 00:02:03,660
+therefore allowing you to query
+
+52
+00:02:03,660 --> 00:02:06,993
+only a subset of your Aurora replicas.
+
+53
+00:02:08,220 --> 00:02:09,870
+Next we have serverless.
+
+54
+00:02:09,870 --> 00:02:11,220
+So this is going to give you
+
+55
+00:02:11,220 --> 00:02:13,650
+automated database instantiation
+
+56
+00:02:13,650 --> 00:02:16,410
+and auto-scaling based on actual usage,
+
+57
+00:02:16,410 --> 00:02:18,288
+which is great when you have infrequent,
+
+58
+00:02:18,288 --> 00:02:21,780
+intermittent or unpredictable workloads.
+
+59
+00:02:21,780 --> 00:02:24,810
+And therefore, you don't need to do any capacity planning.
+
+60
+00:02:24,810 --> 00:02:26,220
+You're going to pay per the second
+
+61
+00:02:26,220 --> 00:02:29,340
+of each Aurora instance that is being spun up,
+
+62
+00:02:29,340 --> 00:02:31,590
+and this can be a lot more cost effective.
+
+63
+00:02:31,590 --> 00:02:32,610
+So how does that work?
+
+64
+00:02:32,610 --> 00:02:36,090
+Well, the client is going to talk to a proxy fleet
+
+65
+00:02:36,090 --> 00:02:37,530
+that is managed by Aurora,
+
+66
+00:02:37,530 --> 00:02:40,080
+and in the backend, many Aurora instances
+
+67
+00:02:40,080 --> 00:02:42,720
+will be created based on your workload
+
+68
+00:02:42,720 --> 00:02:43,770
+in a serverless fashion.
+
+69
+00:02:43,770 --> 00:02:48,000
+So you don't have to provision capacity at all in advance.
+
+70
+00:02:48,000 --> 00:02:50,250
+Next, we have Aurora Multi-Master.
+
+71
+00:02:50,250 --> 00:02:51,660
+This is when we want continuous
+
+72
+00:02:51,660 --> 00:02:53,970
+write availability for the writer notes.
+
+73
+00:02:53,970 --> 00:02:54,930
+So what does that mean?
+
+74
+00:02:54,930 --> 00:02:57,360
+That means that in your Aurora cluster,
+
+75
+00:02:57,360 --> 00:03:00,570
+every Aurora instance is a writer node.
+
+76
+00:03:00,570 --> 00:03:03,510
+That means that every Aurora instance can take in writes.
+
+77
+00:03:03,510 --> 00:03:06,450
+And so this is different from a normal Aurora cluster
+
+78
+00:03:06,450 --> 00:03:07,920
+while you have one new master
+
+79
+00:03:07,920 --> 00:03:09,330
+and in case it fails,
+
+80
+00:03:09,330 --> 00:03:12,000
+then a new one is promoted as the new master.
+
+81
+00:03:12,000 --> 00:03:14,040
+So here your clients can maintain
+
+82
+00:03:14,040 --> 00:03:18,000
+multiple database connections to multiple Aurora instances,
+
+83
+00:03:18,000 --> 00:03:19,950
+and if one was to fail,
+
+84
+00:03:19,950 --> 00:03:21,720
+then your clients can write
+
+85
+00:03:21,720 --> 00:03:24,750
+to another Aurora instance and you'd be good to go.
+
+86
+00:03:24,750 --> 00:03:27,150
+Finally, we have Global Aurora.
+
+87
+00:03:27,150 --> 00:03:31,590
+So in case we have a Aurora cross region read replica,
+
+88
+00:03:31,590 --> 00:03:33,840
+it's going to be very helpful for disaster recovery.
+
+89
+00:03:33,840 --> 00:03:35,340
+Very simple to put in place,
+
+90
+00:03:35,340 --> 00:03:38,160
+but you can also set up the Aurora Global Database,
+
+91
+00:03:38,160 --> 00:03:39,856
+which is the recommended way of doing things today.
+
+92
+00:03:39,856 --> 00:03:42,300
+In this case, you have one primary region
+
+93
+00:03:42,300 --> 00:03:44,160
+where all the reads and writes happen,
+
+94
+00:03:44,160 --> 00:03:48,210
+but you can set up up to five secondary read-only regions
+
+95
+00:03:48,210 --> 00:03:51,090
+where the replication lag should be less than one second
+
+96
+00:03:51,090 --> 00:03:55,500
+and up to 16 read replicas per secondary region.
+
+97
+00:03:55,500 --> 00:03:57,840
+And this will help you decrease latency
+
+98
+00:03:57,840 --> 00:03:59,820
+for the read workloads all over the world,
+
+99
+00:03:59,820 --> 00:04:03,420
+but also in case you have a database outage in one region,
+
+100
+00:04:03,420 --> 00:04:06,150
+promoting another region for disaster recovery purposes,
+
+101
+00:04:06,150 --> 00:04:08,880
+has an RTO, so recover time objective,
+
+102
+00:04:08,880 --> 00:04:09,780
+of less than one minute.
+
+103
+00:04:09,780 --> 00:04:10,770
+So it takes less than one minute
+
+104
+00:04:10,770 --> 00:04:12,540
+to recover into another region.
+
+105
+00:04:12,540 --> 00:04:14,460
+And here is a sentence you should look out for
+
+106
+00:04:14,460 --> 00:04:16,019
+from an exam perspective.
+
+107
+00:04:16,019 --> 00:04:18,014
+It takes, on average, less than one second
+
+108
+00:04:18,014 --> 00:04:20,339
+to replicate data across region
+
+109
+00:04:20,339 --> 00:04:22,620
+for your Aurora Global database.
+
+110
+00:04:22,620 --> 00:04:24,330
+So this is something that if you see an exam,
+
+111
+00:04:24,330 --> 00:04:27,420
+it's a hint to use a Global Aurora.
+
+112
+00:04:27,420 --> 00:04:28,500
+So let's have a look.
+
+113
+00:04:28,500 --> 00:04:30,540
+We have US-East-1 as our primary region
+
+114
+00:04:30,540 --> 00:04:33,150
+which is where the applications do the read and writes,
+
+115
+00:04:33,150 --> 00:04:35,010
+and then we'll set up a secondary region
+
+116
+00:04:35,010 --> 00:04:37,770
+in EU-West-1, where some replication happening
+
+117
+00:04:37,770 --> 00:04:40,080
+with a global database of Aurora
+
+118
+00:04:40,080 --> 00:04:41,430
+and the applications that it can do
+
+119
+00:04:41,430 --> 00:04:44,070
+read only from that setup.
+
+120
+00:04:44,070 --> 00:04:46,080
+But in case US-East-1 fails,
+
+121
+00:04:46,080 --> 00:04:48,060
+then we can fail over to EU-West-1
+
+122
+00:04:48,060 --> 00:04:51,750
+by promoting it as a read-write Aurora cluster.
+
+123
+00:04:51,750 --> 00:04:53,790
+Aurora also has an integration
+
+124
+00:04:53,790 --> 00:04:55,890
+with machine learning services within AWS.
+
+125
+00:04:55,890 --> 00:04:57,660
+So the idea with Aurora Machine Learning
+
+126
+00:04:57,660 --> 00:05:00,030
+is that you can have ML-based predictions
+
+127
+00:05:00,030 --> 00:05:02,340
+to your applications, you have the SQL interface.
+
+128
+00:05:02,340 --> 00:05:04,470
+It's a simple, optimized and secure integration
+
+129
+00:05:04,470 --> 00:05:08,310
+between Aurora and different AWS machine learning services.
+
+130
+00:05:08,310 --> 00:05:10,680
+So two supported services are SageMaker,
+
+131
+00:05:10,680 --> 00:05:11,820
+which allows you to use
+
+132
+00:05:11,820 --> 00:05:14,070
+any kind of machine learning model in the backend
+
+133
+00:05:14,070 --> 00:05:17,220
+or Amazon Comprehend if you want to do sentiment analysis.
+
+134
+00:05:17,220 --> 00:05:18,210
+Now, you don't have to be an expert
+
+135
+00:05:18,210 --> 00:05:19,830
+in SageMaker or Comprehend.
+
+136
+00:05:19,830 --> 00:05:21,180
+You just need to know that Aurora
+
+137
+00:05:21,180 --> 00:05:23,040
+has an integration with those.
+
+138
+00:05:23,040 --> 00:05:25,356
+So in order to use Aurora Machine Learning,
+
+139
+00:05:25,356 --> 00:05:28,170
+you don't need to have machine learning experience.
+
+140
+00:05:28,170 --> 00:05:30,360
+And the use cases for this would be to have
+
+141
+00:05:30,360 --> 00:05:32,220
+fraud detection, ad targeting,
+
+142
+00:05:32,220 --> 00:05:34,114
+sentiment analysis, or product recommendation
+
+143
+00:05:34,114 --> 00:05:35,910
+all within Aurora.
+
+144
+00:05:35,910 --> 00:05:38,160
+So to give you the architecture idea,
+
+145
+00:05:38,160 --> 00:05:39,750
+Aurora is going to be connected
+
+146
+00:05:39,750 --> 00:05:42,660
+to the machine learning services in AWS.
+
+147
+00:05:42,660 --> 00:05:45,660
+And your application can just run a very simple SQL query.
+
+148
+00:05:45,660 --> 00:05:48,330
+For example, what are the recommended products?
+
+149
+00:05:48,330 --> 00:05:49,905
+Aurora will send some data
+
+150
+00:05:49,905 --> 00:05:52,110
+into the machine learning services,
+
+151
+00:05:52,110 --> 00:05:53,760
+such as, for example, the user's profile,
+
+152
+00:05:53,760 --> 00:05:55,740
+the shopping history, et cetera, et cetera.
+
+153
+00:05:55,740 --> 00:05:57,510
+And then the machine learning service
+
+154
+00:05:57,510 --> 00:05:59,940
+will return a prediction directly to Aurora.
+
+155
+00:05:59,940 --> 00:06:03,450
+For example, the user should buy a red shirt and blue pants
+
+156
+00:06:03,450 --> 00:06:05,940
+and then Aurora can just return the query results
+
+157
+00:06:05,940 --> 00:06:10,920
+to the application all through as a result of the SQL query,
+
+158
+00:06:10,920 --> 00:06:12,120
+which is very handy.
+
+159
+00:06:12,120 --> 00:06:13,320
+So that's it, just a feature you need to know
+
+160
+00:06:13,320 --> 00:06:14,400
+going into the exam.
+
+161
+00:06:14,400 --> 00:06:15,660
+So that's it for this lecture.
+
+162
+00:06:15,660 --> 00:06:16,560
+I hope you liked it
+
+163
+00:06:16,560 --> 00:06:18,510
+and I will see you in the next lecture.
+
