@@ -1,0 +1,46 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: SSH and Deploy
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH }}
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          # Install sshpass to securely pass the SSH password
+          sudo apt-get install -y sshpass
+
+          # SSH into the server
+          ssh -o StrictHostKeyChecking=no -i private_key ubuntu@54.89.47.19 << 'ENDSSH'
+            # Stop the current PM2 process
+            npm run pm2:stop
+
+            sudo chown -R ubuntu:ubuntu /var/www/Greenback-Claims-main
+            sudo chown -R ubuntu:ubuntu /var/www/Greenback-Claims-main/dep
+            # Navigate to the project directory
+            cd /var/www/Greenback-Claims-main/dep
+            git reset --hard HEAD
+            git fetch origin main
+            git reset --hard origin/main
+
+            # Pull the latest changes
+            git pull origin main
+            sudo npm install
+
+            # Navigate to the server directory
+            cd server/
+
+            # Start the new PM2 process
+            npm run pm2:start
+          ENDSSH
