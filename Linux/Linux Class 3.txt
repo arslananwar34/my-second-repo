@@ -1,0 +1,47 @@
+Linux Class 3
+
+Assign and change permissions of file and folders
+
+r= read,    w= write,    x= execute
+
+ Owner    groups    users
+  rw-       r-x      r--
+
+owner change of file and folder : chown (username) (filename)
+                                  chown ali dir1
+                                  chown ali dir2
+
+change group of file and folder : chgrp (gropname) (foldername)
+                                  chgrp dev-grp dir2
+-------------------------------------------------------
+Change permission 
+
+owner = u,      group = g,    otherusers = o
+
+change owner permission: chmod u=rwx, g=rw, o=r (filename)
+Second method of permission change 
+r=4, w=2, x=1  , all permissions = 7
+
+chmod 777 filea,     all permissions for filea
+chmod 624 file1
+--------------------------------------------------------
+open task manager : top
+kill process command : kill process id
+forcefully kill process id : kill -9 process id
+softlink : create shortcut : ln -s file1 softfile1
+hardlink : backup file : ln file1 /home/backupfile.
+------------------------------------------------------
+
+Disk Partioning
+
+Check disk of volumes
+lsblk
+
+xvda root volume.
+ check file system : df -h 
+creating disk : fdisk (filename)
+mount : mount /dev/xvdb1 /home
+formatting a disk : mkfs.ext4 /dev/xvdb1
+
+Primary we can make 4 partition
+primary : we can create 3 primary and 1 extended and can make many logical from extended

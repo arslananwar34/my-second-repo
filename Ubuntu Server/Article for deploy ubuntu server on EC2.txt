@@ -1,0 +1,35 @@
+Deploying a Ubuntu instance and Apache2 on AWS EC2
+
+In today's digital age, having a reliable web server is crucial for hosting websites, applications, and online projects. Amazon Web Services (AWS) provides an efficient platform for deploying virtual
+servers in the cloud, with Ubuntu being a popular choice for its stability and versatility.
+In this guide, i'll walk you through the step-by-step process of setting up a web server on an Ubuntu EC2 instance,
+empowering you to establish your online presence with ease.
+
+Step 1: Launching an Ubuntu EC2 Instance
+
+1-Sign in to the AWS Management Console and navigate to the EC2 dashboard.
+2-Click on "Launch Instance" and select the Ubuntu Server AMI (Amazon Machine Image).
+3-Choose an instance type, configure instance details such as network settings and storage, and define security groups
+to allow inbound traffic on port 80 (HTTP) and port 443 (HTTPS).
+4-Review your settings and launch the instance, selecting or creating a key pair for SSH access.
+
+Step 2: Connecting to the Ubuntu Instance
+
+1-Once the instance is running, note down its public IP address.
+2-Use an SSH client (e.g., PuTTY on Windows or Terminal on macOS/Linux) to connect
+to the Ubuntu instance using its public IP address and the key pair you generated.
+   Command : ssh -i /path/to/your/keypair.pem ubuntu@your-public-ip
+
+Step 3: Installing the Web Server (Apache2)
+
+1-Update the package index to ensure you're installing the latest versions of packages:
+   Command : sudo apt update
+2-Install the Apache2 web server:
+   Command : sudo apt install apache2
+
+Step 4: Testing Your Web Server
+
+1-Once Apache2 is installed, you can verify its status to ensure it's running:
+   Command : sudo systemctl status apache2
+2-Open a web browser and navigate to your Ubuntu instance's public IP address or domain name.
+3-If Apache2 is installed and configured correctly, you should see the default Apache2 Ubuntu Default Page.

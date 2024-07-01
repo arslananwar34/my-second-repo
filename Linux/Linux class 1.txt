@@ -1,0 +1,96 @@
+Linux Basics Command
+
+1- man (manual) (Shows detail discription)
+    man ls
+    man mkdir
+
+2- whatis (shows purpose)
+3- ls --help (it shows us the flags like -a, -l etc)
+4- ls (it shows the listof the files and folders)
+5- ll (it shows total number of files with there full detaisl and permissions)
+6- ls (-lh) (list with a human readable form of file size)
+7- cd (use for chnage directory)
+8- pwd (it shows present working directory)
+9- whoiam (shows the username)
+10- hostname (shows the system name)
+
+How to make files in Linux
+
+1- cat
+2- nano
+3- touch
+4- vi/vim
+
+
+1- cat >file1 (> shows we can edit file, file1 is a file name)
+Control + d is use to exit from th editor
+
+cat use only for read data from the file.
+
+cat > (Single greaterthan use for overright the file)
+cat >> (double greaterthan will use for edit the existing file)
+tac (used to see content in reserve order)
+
+Data copy from one file1 to file2
+cat file1 >> file2
+
+(head)  used to see first 10 lines 
+(head -n 3 file2) used to see 3 lines of file2
+
+(tail -n 3 file2) used to see last 3 line of file2.
+
+------------------------------------
+
+for remove files only
+
+rm (filename)
+
+rm -rf (filename)    >>>> Dangerous command it delets all data from the directory or folder
+
+..........................................
+2- nano is a editor used for editing.
+nano (flename)
+
+exit from file
+
+Crtl + x then press enter.
+
+-------------------------------------------
+3- touch is used to create empty file.
+touch file1 (it creates single empty file)
+touch file1 file2 file3 (it creates 3 files together)
+touch file {1..100} (it creates 100 files in one time)
+touch .file2 (.is used to create hidden file)
+   ls -a (it shows hidden files)
+
+-----------------------------------------
+date (shows date)
+cal (Shows calender)
+echo (shows the same thing as we  use after of the echo word)
+like: echo Today is $(date)...... Shows current date
+# (used for commenting)
+history (used to see all commands that we run)
+-----------------------------------------------
+vi/vim is a editor used to enter data.
+vi (filename)
+then press 'i' first then editing and then we have to exit from from the editor we have to save the file
+press ESC then press :wq and press enter.
+
+1- we can delete single line by press dd 2 times on the current line. it will remove.
+2- if we remove 5 lines then we will pres 5 then dd 2 times then it will remove 5 lines.
+3- 'u' is used to ubdo actions.
+4- 'yy' is used to copy line
+5- 'p' is used to pasted line.
+6- '5yy' is used to copy 5 lines.
+7- :set nu (it shows lines with number)
+8- :10 (it moves on the 10 line number)
+9- /line (it finds line world), then press 'n' for next line world.
+10- :split (file location) (split window in 2 files)
+11- crtl + ww (moving in 2 windows)
+:vsplit (same window duplicate)
+
+
+
+
+
+

@@ -1,0 +1,58 @@
+Linux Class 2
+
+for checking file extension : file (filename)
+Create New directory : mkdir (foldername)
+create multiple directory folders : mdkri test1 test2 test3
+create number of direcory folders together : mkdir dir{1..90}
+Remove directory : rmdir (foldername)
+remove multiple directory folder : rmdir {6..10}
+create directory folder and inside of folder: mkdir -P dir1/dir2/dir3
+change directory : cd (foldername)
+change directory and move in folder in folder : cd dir5/dir6/dir7
+For coming back folder : cd ../../..
+Create Directory folder in back : mkdir ../newdir (folername)
+Check folder in back : ls (fulladdress of back)
+Copy command : cp (filename where you want) (folder nameb where you copy data)
+cut command : mv (filename you want to move) (where the file is moved)
+cut file in folder then folder : mv (filename you want to move) (dir1/dir2/dir3)
+Pull from back folder file : mv ../../../file6 (filename)
+To see file with specific word character : echo a*
+check ip address of machine :hostname -i
+check Archetecture of machine : arch, uname -m
+Check operating system version : uname -r, lsb_release -a
+Word Count : wc (flename)
+using Calculator : bc
+remove file and folder : rm -r *
+File content delete : >(filename)
+Copy content from file1 to file2 : cat file1 >file2
+file date root to another : mv dir/*
+folder data root to another : mv -r dir/*
+rename file : mv (filename) (newname)
+-------------------------------------------------
+Linux Distrbution
+Fidora: Redhat, CentOs, Amazon Linux
+downloading commands Dfferent 
+yum install
+
+Debian : Ubuntu, K Ubuntu, X Ubuntu
+apt install
+
+Opensue : suse
+-----------------------------------------------------
+User Creates in Linux
+
+1- useradd        2- adduser
+
+adding using : adduser ali
+user folder in root : tail /etc/passwd
+adding group : groupad grp1
+group check command in folder : tail /etc/group
+adding user ali in grp1 : gpasswd -a ali grp1
+adding multiple users in grp : gpasswd -M ali,usman grp1
+Set password on users: passwd ali, set password then crtl+D
+Delete User : userdel ali
+Delete Group : groupdel grp1
+---------------------------------------------------------
+
+
+ 
